@@ -4,7 +4,7 @@ In this challenge, we'll be creating an HR database for a company and running qu
 
 The steps for this challenge include:
 
-* We use an ERD (Entity Relationship Diagram) to build the database structure  
+* We use an ERD (Entity Relationship Diagram) to build the database structure *the web app used to create this is at <https://app.quickdatabasediagrams.com/#/d/C89fUB>*  
 * Create tables using PostgresSQL code
 * Import data from .csv files using Pandas and Python code  
 * Create Foreign key relationships between the database tables in PostgresSQL  
@@ -21,6 +21,8 @@ The proper order to successfully demonstrate this project is:
 5. Run the add Foreign Keys from the hr_database_create_tables.sql code.  
 6. Run the hr_queries.sql file to retrieve the desired data.  
 7. Run the SQL_Data_to_Pandas.ipynb file to pull the data from SQL database to a Jupyter notebook in pandas for analysis.
+
+![View](Images/ERD.png)
 
 ![View](Images/employee_salaries_distribution.png)
 
