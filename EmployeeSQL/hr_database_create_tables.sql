@@ -1,20 +1,7 @@
--- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
--- Link to schema: https://app.quickdatabasediagrams.com/#/d/C89fUB
--- NOTE! If you have used non-SQL datatypes in your design, you will have to change these here.
+-- This module is to CREATE tables, add FOREIGN KEYs
+-- It's also to remove FOREIGN KEY constraints and DELETE tables if necessary
 
--- Modify this code to update the DB schema diagram.
--- To reset the sample schema, replace everything with
--- two dots ('..' - without quotes).
-
-DROP TABLE IF EXISTS "titles";
-DROP TABLE IF EXISTS "salaries";
-DROP TABLE IF EXISTS "employees";
-DROP TABLE IF EXISTS "dept_manager";
-DROP TABLE IF EXISTS "dept_emp";
-DROP TABLE IF EXISTS "departments";
-
------------------------------------------------------------------------------------------------------
-
+-- Create tables if needed
 CREATE TABLE "departments" (
     "dept_no" VARCHAR NOT NULL,
     "dept_name" VARCHAR NOT NULL,
@@ -61,6 +48,7 @@ CREATE TABLE "titles" (
 
 ---------------------------------------------------------------------------------------------
 
+-- Add foreign key constraints
 ALTER TABLE "dept_emp" ADD CONSTRAINT "fk_dept_emp_emp_no" FOREIGN KEY("emp_no")
 REFERENCES "employees" ("emp_no");
 
@@ -81,9 +69,10 @@ REFERENCES "employees" ("emp_no");
 
 _____________________________________________________________________________________________________________________
 
+-- Remove constraints in order to be able to drop tables
 ALTER TABLE employees 
   DROP CONSTRAINT IF EXISTS fk_employees_emp_title_id;
-  
+
 ALTER TABLE dept_manager 
   DROP CONSTRAINT IF EXISTS fk_dept_manager_dept_no;
 
@@ -99,11 +88,12 @@ ALTER TABLE dept_emp
 ALTER TABLE salaries 
   DROP CONSTRAINT IF EXISTS fk_salaries_emp_no;
 
-ALTER TABLE titles 
-  DROP CONSTRAINT IF EXISTS pk_titles;
+-----------------------------------------------------------------------------------------------------
 
-ALTER TABLE departments 
-  DROP CONSTRAINT IF EXISTS pk_departments;
-
-ALTER TABLE employees 
-  DROP CONSTRAINT IF EXISTS pk_employees;
+-- Drop tables if needed
+DROP TABLE IF EXISTS "titles";
+DROP TABLE IF EXISTS "salaries";
+DROP TABLE IF EXISTS "employees";
+DROP TABLE IF EXISTS "dept_manager";
+DROP TABLE IF EXISTS "dept_emp";
+DROP TABLE IF EXISTS "departments";

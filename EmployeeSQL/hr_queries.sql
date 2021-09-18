@@ -47,7 +47,3 @@ SELECT em.emp_no, em.last_name, em.first_name, dept_name
 SELECT last_name, COUNT(*) FROM employees
 	GROUP BY last_name
 	ORDER BY COUNT(*) DESC;
-	
--- SELECT *
--- FROM pg_settings
--- WHERE name = 'port';
