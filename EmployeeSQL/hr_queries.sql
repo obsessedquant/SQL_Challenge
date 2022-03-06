@@ -1,3 +1,41 @@
+-- Return the count of characters in the max string from a column
+-- SELECT max(char_length(column)) AS Max_Length_String FROM table
+SELECT max(char_length(last_name)) AS Max_Length_String FROM employees
+
+-- Return what is the value of the max length string in a column
+-- SELECT column
+-- FROM table
+-- WHERE char_length(column) = (SELECT max(char_length(column)) FROM table )
+SELECT DISTINCT last_name
+FROM employees
+WHERE char_length(last_name) = (SELECT max(char_length(last_name)) FROM employees )
+
+-- Find Third Most Characters Last Name
+SELECT DISTINCT last_name, char_length(last_name)
+FROM employees
+ORDER BY char_length(last_name) DESC
+LIMIT 1
+OFFSET 2
+
+-- Create View example
+CREATE VIEW Third_Longest_Last_Name AS
+SELECT DISTINCT last_name, char_length(last_name)
+FROM employees
+ORDER BY char_length(last_name) DESC
+LIMIT 1
+OFFSET 2
+
+-- Show list of views
+select table_name from INFORMATION_SCHEMA.views
+WHERE table_schema = ANY (current_schemas(false))
+
+-- Show a View
+SELECT * FROM third_longest_last_name
+
+-- Show list of tables
+SELECT * FROM pg_catalog.pg_tables
+WHERE schemaname='public'
+
 -- Question 1. List the following details of each employee: employee number, last name, first name, sex, and salary.
 SELECT em.emp_no, em.last_name, em.first_name, em.sex, sa.salary
 	FROM employees em
@@ -42,7 +80,7 @@ SELECT em.emp_no, em.last_name, em.first_name, dept_name
 	INNER JOIN dept_emp ON dept_emp.emp_no = em.emp_no
 	INNER JOIN departments ON departments.dept_no = dept_emp.dept_no
 	WHERE dept_name IN ('Sales','Development')
-
+	
 -- Question 8. In descending order, list the frequency count of employee last names, i.e., how many employees share each last name.
 SELECT last_name, COUNT(*) FROM employees
 	GROUP BY last_name
